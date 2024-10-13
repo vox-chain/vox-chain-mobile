@@ -1,0 +1,33 @@
+{
+  "private": true,
+  "name": "@ft-hackathon-2024/root",
+  "scripts": {
+    "dev": "turbo dev",
+    "dev:mobile": "turbo dev --filter=\"{./apps/mobile}...\"",
+    "lint": "turbo lint",
+    "lint-fix": "turbo lint-fix",
+    "build": "turbo build",
+    "build:mobile": "turbo build --filter=\"...{./apps/mobile}\"",
+    "clean": "turbo clean && rm -rf node_modules .turbo"
+  },
+  "devDependencies": {
+    "turbo": "^2.1.3",
+    "typescript": "^4.9.5"
+  },
+  "packageManager": "pnpm@9.1.4",
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "@babel/*",
+        "expo-modules-*",
+        "typescript"
+      ]
+    }
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  }
+}

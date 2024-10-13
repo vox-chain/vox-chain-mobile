@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "FT Hackathon 2024",
+    "slug": "ft-hackathon-2024",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/Logo.png",
+    "userInterfaceStyle": "automatic",
+    "scheme": "ftwallet",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "io.fevertokens.hackathon"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptiveIcon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "permissions": ["android.permission.USE_BIOMETRIC", "android.permission.USE_FINGERPRINT"],
+      "package": "io.fevertokens.hackathon"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png",
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Allow FTWallet to use Face ID."
+        }
+      ],
+      "expo-localization",
+      "expo-secure-store"
+    ]
+  }
+}
