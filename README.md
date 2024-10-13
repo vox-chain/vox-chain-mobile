@@ -1,5 +1,9 @@
 # 📦 FT Hackaton 2024 Monorepo
 
+## ⚠️ Under Construction
+
+This project is currently under active development. Features and documentation are subject to change.
+
 ### Dependencies
 
 - [Node.js](https://nodejs.org/en/download/) - JavaScript runtime
