@@ -10,6 +10,6 @@ This is a [React Native](https://reactnative.dev/) app that uses [Expo](https://
 
 Since this app uses [expo-dev-client](https://docs.expo.dev/develop/development-builds/introduction/), you will need to create a development build of the app. To do this, you will need to have android-studio or bare android-sdk installed on your machine (for android) or xcode installed on your machine (for ios and only using a macOS machine).
 
-Alternatively, you can use the [EAS Build](https://docs.expo.dev/build/introduction/) service to build the app for you on the cloud without needing to install any of the above.
-
 4. **create and run dev app** - For android, run `pnpm android` and for ios, run `pnpm ios`.
+
+Alternatively for the last step, you can use the [EAS Build](https://docs.expo.dev/build/introduction/) service to build the app for you on the cloud without needing to install any of the above. It will provide you with the app installable file, install it on your device then run the app on your device and `pnpm start` on your terminal.
