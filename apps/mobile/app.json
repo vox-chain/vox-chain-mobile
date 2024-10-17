@@ -6,6 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/Logo.png",
     "userInterfaceStyle": "automatic",
+    "platforms": ["ios", "android"],
     "scheme": "ftwallet",
     "splash": {
       "image": "./assets/splash.png",
@@ -13,10 +14,12 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
       "bundleIdentifier": "io.fevertokens.hackathon"
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptiveIcon.png",
         "backgroundColor": "#ffffff"
@@ -30,14 +33,35 @@
       "output": "single"
     },
     "plugins": [
+      "@react-native-firebase/app",
+      "@react-native-firebase/crashlytics",
+      "expo-localization",
+      "expo-secure-store",
       [
         "expo-local-authentication",
         {
           "faceIDPermission": "Allow FTWallet to use Face ID."
         }
       ],
-      "expo-localization",
-      "expo-secure-store"
-    ]
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "useFrameworks": "static"
+          }
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "c14b3f20-15c4-4b7a-a379-e1e9a734b765"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/c14b3f20-15c4-4b7a-a379-e1e9a734b765"
+    }
   }
 }
