@@ -10,7 +10,7 @@ const HeaderRight = () => {
   const { logout } = useAuth();
 
   return (
-    <View className="flex-row mr-5 gap-5">
+    <View className="flex-row mr-5 gap-5 items-center">
       <TouchableOpacity onPress={toggleTheme}>
         <Ionicons
           name={isDarkMode ? 'sunny-outline' : 'moon-outline'}
