@@ -27,11 +27,6 @@
       "permissions": ["android.permission.USE_BIOMETRIC", "android.permission.USE_FINGERPRINT"],
       "package": "io.fevertokens.hackathon"
     },
-    "web": {
-      "favicon": "./assets/favicon.png",
-      "bundler": "metro",
-      "output": "single"
-    },
     "plugins": [
       "@react-native-firebase/app",
       "@react-native-firebase/crashlytics",
@@ -54,14 +49,8 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "c14b3f20-15c4-4b7a-a379-e1e9a734b765"
+        "projectId": "a57c3d36-d29b-40ed-a2f3-4c9cb7ee0204"
       }
-    },
-    "runtimeVersion": {
-      "policy": "appVersion"
-    },
-    "updates": {
-      "url": "https://u.expo.dev/c14b3f20-15c4-4b7a-a379-e1e9a734b765"
     }
   }
 }
