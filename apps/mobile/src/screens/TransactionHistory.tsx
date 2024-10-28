@@ -264,7 +264,7 @@ const TransactionHistory = () => {
       <View style={styles.header}>
         <View style={styles.header2}>
           <MaterialIcons style={styles.headerIcon} name="history-edu" size={25} color="black" />
-          <Text style={styles.headerTitle}>Your Contacts</Text>
+          <Text style={styles.headerTitle}>Your Transactions</Text>
         </View>
         <TouchableOpacity
           style={styles.sortButton}

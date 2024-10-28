@@ -182,7 +182,7 @@ const LogsScreen = () => {
       <View style={styles.header}>
         <View style={styles.header2}>
           <Icon style={styles.headerIcon} name="math-log" size={28} color="black" />
-          <Text style={styles.headerTitle}>Your Contacts</Text>
+          <Text style={styles.headerTitle}>Your Logs</Text>
         </View>
         <TouchableOpacity style={styles.refreshButton} onPress={loadLogs}>
           <Icon name="refresh" size={24} color="#e60000" />

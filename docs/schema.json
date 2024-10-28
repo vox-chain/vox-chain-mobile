@@ -1,0 +1,88 @@
+{
+  "users": {
+    "userId": {
+      "profile": {
+        "name": "String",
+        "email": "String",
+        "wallet": "String",
+        "created_at": "Timestamp"
+      },
+      "settings": {
+        "authentication": {
+          "method": "String",
+          "two_factor_enabled": "Boolean"
+        }
+      }
+    }
+  },
+  "contacts": {
+    "userId": {
+      "contactId": {
+        "name": "String",
+        "address": "String",
+        "transactions": [
+          {
+            "transactionId": {
+              "amount": "Number",
+              "transaction_type": {
+                "type": "String",
+                "enum": ["send", "swap", "wrap", "unwrap"]
+              },
+              "to": "String",
+              "status": "String",
+              "timestamp": "Timestamp",
+              "response": {
+                "intent": {
+                  "transaction_type": {
+                    "type": "String",
+                    "enum": ["send", "swap", "wrap", "unwrap"]
+                  },
+                  "amount": "Number",
+                  "to": "String"
+                },
+                "chain": "String"
+              }
+            }
+          }
+        ]
+      }
+    }
+  },
+  "transactions": {
+    "transactionId": {
+      "userId": "String",
+      "intent": {
+        "transaction_type": {
+          "type": "String",
+          "enum": ["send", "swap", "wrap", "unwrap"]
+        },
+        "amount": "Number",
+        "to": "String"
+      },
+      "status": "String",
+      "timestamp": "Timestamp",
+      "response": {
+        "intent": {
+          "transaction_type": {
+            "type": "String",
+            "enum": ["send", "swap", "wrap", "unwrap"]
+          },
+          "amount": "Number",
+          "to": "String"
+        },
+        "chain": "String"
+      }
+    }
+  },
+  "logs": {
+    "logId": {
+      "type": {
+        "type": "String",
+        "enum": ["Error", "Warning", "Info", "Success"]
+      },
+      "message": "String",
+      "time": "Timestamp",
+      "duration": "Number"
+    }
+  }
+}
