@@ -28,27 +28,10 @@ const ImportWalletScreen = ({ navigation }: RootStackScreenProps<'ImportWalletSc
   const { restoreFromPhrase } = useWallet();
 
   const handleSubmit = async () => {
-    const enrolled = await getEnrolledLevelAsync();
-
-    if (!enrolled) {
-      toast.error('Phone locking is crucial for security.', {
-        text1: 'Enable lock to proceed',
-      });
-      return;
-    }
-
-    if (enrolled === 1 && (await hasHardwareAsync()))
-      toast.info('Biometrics are recomended for enhanced security.');
-
-    setLoading(true);
-    await sleep(10);
-    const success = await restoreFromPhrase(mnemonicPhrase);
-    setLoading(false);
-    if (success)
-      navigation.reset({
-        index: 0,
-        routes: [{ name: 'Main', params: { screen: 'Home' } }],
-      });
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Main', params: { screen: 'Home' } }],
+    });
   };
 
   return (

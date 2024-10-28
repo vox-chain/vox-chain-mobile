@@ -1,8 +1,3 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import Clipboard from '@react-native-clipboard/clipboard';
-import { BlurView } from 'expo-blur';
-import * as Haptics from 'expo-haptics';
-import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
@@ -16,15 +11,20 @@ import {
   StatusBar,
   ActivityIndicator,
   Dimensions,
-  ScrollView,
+  Alert,
+  ScrollView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { LinearGradient } from 'expo-linear-gradient';
+import * as Haptics from 'expo-haptics';
+import { BlurView } from 'expo-blur';
+import Clipboard from '@react-native-clipboard/clipboard';
 
 const { width, height } = Dimensions.get('window');
 const STORAGE_KEY = '@transactions_history';
 
-const TransactionHistory = () => {
+const TransactionLogs = () => {
   const [transactions, setTransactions] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTransaction, setSelectedTransaction] = useState(null);
@@ -55,7 +55,7 @@ const TransactionHistory = () => {
           hash: '0x123...abc',
           gasFee: '0.002 ETH',
           intentSource: 'voice',
-          originalIntent: 'Send 4 ETH to David',
+          originalIntent: 'Send 4 ETH to David'
         },
         {
           id: '2',
@@ -69,7 +69,7 @@ const TransactionHistory = () => {
           hash: '0x456...def',
           gasFee: '0.003 ETH',
           intentSource: 'text',
-          originalIntent: 'Swap 1000 USDC to ETH',
+          originalIntent: 'Swap 1000 USDC to ETH'
         },
         // Add more mock transactions as needed
       ];
@@ -116,17 +116,18 @@ const TransactionHistory = () => {
 
   const filteredTransactions = transactions
     .filter((tx) => {
-      const matchesSearch =
+      const matchesSearch = 
         tx.recipient?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         tx.recipientAddress?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         tx.originalIntent?.toLowerCase().includes(searchQuery.toLowerCase());
-
-      const matchesFilter = filterStatus === 'all' || tx.status === filterStatus;
-
+      
+      const matchesFilter = 
+        filterStatus === 'all' || tx.status === filterStatus;
+      
       return matchesSearch && matchesFilter;
     })
     .sort((a, b) => {
-      return sortOrder === 'desc'
+      return sortOrder === 'desc' 
         ? new Date(b.timestamp) - new Date(a.timestamp)
         : new Date(a.timestamp) - new Date(b.timestamp);
     });
@@ -144,22 +145,23 @@ const TransactionHistory = () => {
       >
         <LinearGradient
           colors={['#ffffff', '#ffffff']}
-          style={[styles.transactionCard, isSelected && styles.selectedCard]}
+          style={[
+            styles.transactionCard,
+            isSelected && styles.selectedCard
+          ]}
         >
           <View style={styles.transactionHeader}>
-            <View
-              style={[
-                styles.iconContainer,
-                { backgroundColor: `${getStatusColor(transaction.status)}15` },
-              ]}
-            >
+            <View style={[
+              styles.iconContainer,
+              { backgroundColor: `${getStatusColor(transaction.status)}15` }
+            ]}>
               <Icon
                 name={getTransactionIcon(transaction.type)}
                 size={24}
                 color={getStatusColor(transaction.status)}
               />
             </View>
-
+            
             <View style={styles.transactionDetails}>
               <Text style={styles.transactionType}>
                 {transaction.type.charAt(0).toUpperCase() + transaction.type.slice(1)}
@@ -180,13 +182,13 @@ const TransactionHistory = () => {
                 color="#666"
                 style={styles.intentIcon}
               />
-              <View
-                style={[
-                  styles.statusBadge,
-                  { backgroundColor: getStatusColor(transaction.status) },
-                ]}
-              >
-                <Text style={styles.statusText}>{transaction.status}</Text>
+              <View style={[
+                styles.statusBadge,
+                { backgroundColor: getStatusColor(transaction.status) }
+              ]}>
+                <Text style={styles.statusText}>
+                  {transaction.status}
+                </Text>
               </View>
             </View>
           </View>
@@ -194,7 +196,7 @@ const TransactionHistory = () => {
           {isSelected && (
             <View style={styles.expandedContent}>
               <Text style={styles.expandedTitle}>Transaction Details</Text>
-
+              
               <View style={styles.detailRow}>
                 <Text style={styles.detailLabel}>Original Intent:</Text>
                 <Text style={styles.detailValue}>{transaction.originalIntent}</Text>
@@ -227,23 +229,26 @@ const TransactionHistory = () => {
 
   const FilterButton = ({ label, value }) => (
     <TouchableOpacity
-      style={[styles.filterButton, filterStatus === value && styles.activeFilter]}
+      style={[
+        styles.filterButton,
+        filterStatus === value && styles.activeFilter
+      ]}
       onPress={() => setFilterStatus(value)}
     >
       <Icon
         name={
-          value === 'all'
-            ? 'format-list-bulleted'
-            : value === 'completed'
-              ? 'check-circle'
-              : value === 'pending'
-                ? 'clock-outline'
-                : 'alert-circle'
+          value === 'all' ? 'format-list-bulleted' :
+          value === 'completed' ? 'check-circle' :
+          value === 'pending' ? 'clock-outline' :
+          'alert-circle'
         }
         size={20}
         color={filterStatus === value ? '#fff' : '#e60000'}
       />
-      <Text style={[styles.filterText, filterStatus === value && styles.activeFilterText]}>
+      <Text style={[
+        styles.filterText,
+        filterStatus === value && styles.activeFilterText
+      ]}>
         {label}
       </Text>
     </TouchableOpacity>
@@ -260,16 +265,13 @@ const TransactionHistory = () => {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" />
-
+      
       <View style={styles.header}>
-        <View style={styles.header2}>
-          <MaterialIcons style={styles.headerIcon} name="history-edu" size={25} color="black" />
-          <Text style={styles.headerTitle}>Your Contacts</Text>
-        </View>
+        <Text style={styles.headerTitle}>Transactions</Text>
         <TouchableOpacity
           style={styles.sortButton}
           onPress={() => {
-            setSortOrder((prev) => (prev === 'desc' ? 'asc' : 'desc'));
+            setSortOrder(prev => prev === 'desc' ? 'asc' : 'desc');
             Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
           }}
         >
@@ -292,7 +294,10 @@ const TransactionHistory = () => {
           placeholderTextColor="#666"
         />
         {searchQuery.length > 0 && (
-          <TouchableOpacity style={styles.clearSearch} onPress={() => setSearchQuery('')}>
+          <TouchableOpacity
+            style={styles.clearSearch}
+            onPress={() => setSearchQuery('')}
+          >
             <Icon name="close-circle" size={20} color="#666" />
           </TouchableOpacity>
         )}
@@ -315,7 +320,9 @@ const TransactionHistory = () => {
           <View style={styles.emptyContainer}>
             <Icon name="history" size={48} color="#ccc" />
             <Text style={styles.emptyMessage}>
-              {searchQuery ? 'No transactions found matching your search' : 'No transactions yet'}
+              {searchQuery
+                ? 'No transactions found matching your search'
+                : 'No transactions yet'}
             </Text>
           </View>
         }
@@ -345,22 +352,11 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#E9ECEF',
   },
-  header2: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-  },
   headerTitle: {
-    fontSize: 24,
+    fontSize: 28,
     fontWeight: 'bold',
     color: '#212529',
   },
-  headerIcon: {
-    marginRight: 5,
-  },
-
   sortButton: {
     padding: 8,
   },
@@ -557,12 +553,10 @@ const TransactionDetailsModal = ({ transaction, visible, onClose }) => {
               </View>
               <View style={modalStyles.infoRow}>
                 <Text style={modalStyles.label}>Status</Text>
-                <View
-                  style={[
-                    modalStyles.statusBadge,
-                    { backgroundColor: getStatusColor(transaction.status) },
-                  ]}
-                >
+                <View style={[
+                  modalStyles.statusBadge,
+                  { backgroundColor: getStatusColor(transaction.status) }
+                ]}>
                   <Text style={modalStyles.statusText}>{transaction.status}</Text>
                 </View>
               </View>
@@ -600,7 +594,7 @@ const TransactionDetailsModal = ({ transaction, visible, onClose }) => {
               </View>
               <View style={modalStyles.infoRow}>
                 <Text style={modalStyles.label}>Address</Text>
-                <TouchableOpacity
+                <TouchableOpacity 
                   onPress={() => {
                     Clipboard.setString(transaction.recipientAddress);
                     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -618,10 +612,10 @@ const TransactionDetailsModal = ({ transaction, visible, onClose }) => {
               <View style={modalStyles.infoRow}>
                 <Text style={modalStyles.label}>Source</Text>
                 <View style={modalStyles.intentSourceContainer}>
-                  <Icon
-                    name={transaction.intentSource === 'voice' ? 'microphone' : 'text'}
-                    size={16}
-                    color="#666"
+                  <Icon 
+                    name={transaction.intentSource === 'voice' ? 'microphone' : 'text'} 
+                    size={16} 
+                    color="#666" 
                   />
                   <Text style={modalStyles.value}>
                     {transaction.intentSource === 'voice' ? 'Voice Command' : 'Text Input'}
@@ -635,7 +629,7 @@ const TransactionDetailsModal = ({ transaction, visible, onClose }) => {
             </View>
 
             {transaction.status === 'completed' && (
-              <TouchableOpacity
+              <TouchableOpacity 
                 style={modalStyles.viewExplorerButton}
                 onPress={() => {
                   // Implement blockchain explorer link
@@ -762,4 +756,4 @@ const modalStyles = StyleSheet.create({
   },
 });
 
-export default TransactionHistory;
+export default TransactionLogs;

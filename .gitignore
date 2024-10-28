@@ -62,3 +62,5 @@ xcuserdata
 
 # VSCode
 .history/
+.vscode/settings.json
+apps/mobile/.env

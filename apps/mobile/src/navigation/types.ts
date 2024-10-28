@@ -18,7 +18,10 @@ export type RootStackScreenProps<T extends keyof RootStackParamList> = StackScre
 export type TabParamList = {
   Home: undefined;
   Portfolio: undefined;
-  Pairings: undefined;
+  Contact: undefined;
+  History: undefined;
+  Logs: undefined;
+  Settings: undefined;
   TransferScreen: undefined;
   TransactionHistory: undefined;
   NFTsection: undefined;
