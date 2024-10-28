@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState, useEffect } from 'react';
 import {
   View,
@@ -14,7 +15,6 @@ import {
   FlatList,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 // Selection options for different settings
 const OPTIONS = {
@@ -36,7 +36,7 @@ const SettingsScreen = ({ navigation }) => {
       transactionAlerts: true,
       marketingUpdates: false,
       priceAlerts: true,
-      securityAlerts: true
+      securityAlerts: true,
     },
     security: {
       biometricEnabled: false,
@@ -44,29 +44,29 @@ const SettingsScreen = ({ navigation }) => {
       autoLock: true,
       lockTimer: '5',
       privateMode: false,
-      backupEnabled: true
+      backupEnabled: true,
     },
     display: {
       darkMode: false,
       showBalance: true,
       compactMode: false,
       highContrast: false,
-      fontSize: 'medium'
+      fontSize: 'medium',
     },
     network: {
       defaultNetwork: 'Ethereum',
       gasPreference: 'standard',
       slippageTolerance: '0.5',
-      autoConnect: true
+      autoConnect: true,
     },
     privacy: {
       analytics: true,
       crashReports: true,
       personalization: false,
-      shareData: false
+      shareData: false,
     },
     language: 'English',
-    currency: 'USD'
+    currency: 'USD',
   });
 
   // Modal states
@@ -75,7 +75,7 @@ const SettingsScreen = ({ navigation }) => {
     type: '',
     options: [],
     category: '',
-    setting: ''
+    setting: '',
   });
 
   useEffect(() => {
@@ -109,8 +109,8 @@ const SettingsScreen = ({ navigation }) => {
       ...settings,
       [category]: {
         ...settings[category],
-        [setting]: !settings[category][setting]
-      }
+        [setting]: !settings[category][setting],
+      },
     };
     saveSettings(newSettings);
   };
@@ -121,17 +121,17 @@ const SettingsScreen = ({ navigation }) => {
   };
 
   const handleSelection = (value) => {
-    let newSettings = { ...settings };
-    
+    const newSettings = { ...settings };
+
     if (currentSelection.category) {
       newSettings[currentSelection.category] = {
         ...newSettings[currentSelection.category],
-        [currentSelection.setting]: value
+        [currentSelection.setting]: value,
       };
     } else {
       newSettings[currentSelection.type] = value;
     }
-    
+
     saveSettings(newSettings);
     setModalVisible(false);
   };
@@ -155,14 +155,11 @@ const SettingsScreen = ({ navigation }) => {
             data={currentSelection.options}
             keyExtractor={(item) => item}
             renderItem={({ item }) => (
-              <TouchableOpacity
-                style={styles.modalItem}
-                onPress={() => handleSelection(item)}
-              >
+              <TouchableOpacity style={styles.modalItem} onPress={() => handleSelection(item)}>
                 <Text style={styles.modalItemText}>{item}</Text>
-                {((currentSelection.category ? 
-                  settings[currentSelection.category][currentSelection.setting] : 
-                  settings[currentSelection.type]) === item) && (
+                {(currentSelection.category
+                  ? settings[currentSelection.category][currentSelection.setting]
+                  : settings[currentSelection.type]) === item && (
                   <Icon name="check" size={24} color="#e60000" />
                 )}
               </TouchableOpacity>
@@ -173,12 +170,15 @@ const SettingsScreen = ({ navigation }) => {
     </Modal>
   );
 
-  const renderSettingItem = ({ icon, title, value, onPress, showToggle = false, description = '' }) => (
-    <TouchableOpacity
-      style={styles.settingItem}
-      onPress={onPress}
-      activeOpacity={0.7}
-    >
+  const renderSettingItem = ({
+    icon,
+    title,
+    value,
+    onPress,
+    showToggle = false,
+    description = '',
+  }) => (
+    <TouchableOpacity style={styles.settingItem} onPress={onPress} activeOpacity={0.7}>
       <View style={styles.settingItemLeft}>
         <View style={styles.settingIcon}>
           <Icon name={icon} size={24} color="#64748b" />
@@ -192,15 +192,17 @@ const SettingsScreen = ({ navigation }) => {
         <TouchableOpacity
           style={[
             styles.customSwitch,
-            value ? styles.customSwitchActive : styles.customSwitchInactive
+            value ? styles.customSwitchActive : styles.customSwitchInactive,
           ]}
           onPress={onPress}
           activeOpacity={0.8}
         >
-          <View style={[
-            styles.customSwitchThumb,
-            value ? styles.customSwitchThumbActive : styles.customSwitchThumbInactive
-          ]} />
+          <View
+            style={[
+              styles.customSwitchThumb,
+              value ? styles.customSwitchThumbActive : styles.customSwitchThumbInactive,
+            ]}
+          />
         </TouchableOpacity>
       ) : (
         <View style={styles.settingItemRight}>
@@ -224,7 +226,10 @@ const SettingsScreen = ({ navigation }) => {
       <SelectionModal />
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Settings</Text>
-        <TouchableOpacity style={styles.helpButton} onPress={() => Linking.openURL('https://support.example.com')}>
+        <TouchableOpacity
+          style={styles.helpButton}
+          onPress={() => Linking.openURL('https://support.example.com')}
+        >
           <Icon name="help-circle-outline" size={24} color="#e60000" />
         </TouchableOpacity>
       </View>
@@ -254,7 +259,8 @@ const SettingsScreen = ({ navigation }) => {
             icon: 'lock-clock',
             title: 'Auto-Lock Timer',
             value: `${settings.security.lockTimer} minutes`,
-            onPress: () => openSelectionModal('Lock Timer', OPTIONS.lockTimer, 'security', 'lockTimer'),
+            onPress: () =>
+              openSelectionModal('Lock Timer', OPTIONS.lockTimer, 'security', 'lockTimer'),
           })}
           {renderSettingItem({
             icon: 'shield-check-outline',
@@ -281,19 +287,32 @@ const SettingsScreen = ({ navigation }) => {
             icon: 'ethereum',
             title: 'Default Network',
             value: settings.network.defaultNetwork,
-            onPress: () => openSelectionModal('Network', OPTIONS.defaultNetwork, 'network', 'defaultNetwork'),
+            onPress: () =>
+              openSelectionModal('Network', OPTIONS.defaultNetwork, 'network', 'defaultNetwork'),
           })}
           {renderSettingItem({
             icon: 'gas-station',
             title: 'Gas Preference',
             value: settings.network.gasPreference,
-            onPress: () => openSelectionModal('Gas Preference', OPTIONS.gasPreference, 'network', 'gasPreference'),
+            onPress: () =>
+              openSelectionModal(
+                'Gas Preference',
+                OPTIONS.gasPreference,
+                'network',
+                'gasPreference'
+              ),
           })}
           {renderSettingItem({
             icon: 'percent',
             title: 'Slippage Tolerance',
             value: `${settings.network.slippageTolerance}%`,
-            onPress: () => openSelectionModal('Slippage Tolerance', OPTIONS.slippageTolerance, 'network', 'slippageTolerance'),
+            onPress: () =>
+              openSelectionModal(
+                'Slippage Tolerance',
+                OPTIONS.slippageTolerance,
+                'network',
+                'slippageTolerance'
+              ),
           })}
         </View>
 
@@ -490,7 +509,7 @@ const styles = StyleSheet.create({
   customSwitchThumbInactive: {
     transform: [{ translateX: 0 }],
   },
-  
+
   // Modal styles
   modalOverlay: {
     flex: 1,

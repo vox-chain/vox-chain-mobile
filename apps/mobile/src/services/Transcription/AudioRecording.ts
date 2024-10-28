@@ -41,13 +41,17 @@ class AudioRecordingServiceImpl implements AudioRecordingService {
         android: {
           ...Audio.RecordingOptionsPresets.HIGH_QUALITY.android,
           extension: '.wav',
+          // eslint-disable-next-line import/namespace
           outputFormat: Audio.RECORDING_OPTION_ANDROID_OUTPUT_FORMAT_WAV,
+          // eslint-disable-next-line import/namespace
           audioEncoder: Audio.RECORDING_OPTION_ANDROID_AUDIO_ENCODER_DEFAULT,
         },
         ios: {
           ...Audio.RecordingOptionsPresets.HIGH_QUALITY.ios,
           extension: '.wav',
+          // eslint-disable-next-line import/namespace
           outputFormat: Audio.RECORDING_OPTION_IOS_OUTPUT_FORMAT_LINEARPCM,
+          // eslint-disable-next-line import/namespace
           audioQuality: Audio.RECORDING_OPTION_IOS_AUDIO_QUALITY_MAX,
           sampleRate: 44100,
           numberOfChannels: 1,

@@ -1,3 +1,4 @@
+import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
   View,
@@ -14,7 +15,6 @@ import {
   ActionSheetIOS,
   Alert,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
 //import * as ImagePicker from 'expo-image-picker';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -24,10 +24,7 @@ const CustomSwitch = ({ value, onValueChange, activeColor = '#2563eb' }) => {
     <TouchableOpacity
       activeOpacity={0.8}
       onPress={() => onValueChange(!value)}
-      style={[
-        styles.switchContainer,
-        { backgroundColor: value ? activeColor : '#e2e8f0' }
-      ]}
+      style={[styles.switchContainer, { backgroundColor: value ? activeColor : '#e2e8f0' }]}
     >
       <View
         style={[
@@ -35,7 +32,7 @@ const CustomSwitch = ({ value, onValueChange, activeColor = '#2563eb' }) => {
           {
             backgroundColor: value ? '#ffffff' : '#f8fafc',
             transform: [{ translateX: value ? 28 : 0 }],
-          }
+          },
         ]}
       />
     </TouchableOpacity>
@@ -78,22 +75,21 @@ const ProfileSettings = () => {
         }
       );
     } else {
-      Alert.alert(
-        'Change Profile Photo',
-        'Choose an option',
-        [
-          { text: 'Cancel', style: 'cancel' },
-          { text: 'Take Photo', onPress: () => pickImage(ImagePicker.launchCameraAsync) },
-          { text: 'Choose from Library', onPress: () => pickImage(ImagePicker.launchImageLibraryAsync) },
-        ]
-      );
+      Alert.alert('Change Profile Photo', 'Choose an option', [
+        { text: 'Cancel', style: 'cancel' },
+        { text: 'Take Photo', onPress: () => pickImage(ImagePicker.launchCameraAsync) },
+        {
+          text: 'Choose from Library',
+          onPress: () => pickImage(ImagePicker.launchImageLibraryAsync),
+        },
+      ]);
     }
   };
 
   const pickImage = async (launcher) => {
     try {
       const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
-      
+
       if (!permissionResult.granted) {
         Alert.alert(
           'Permission Required',
@@ -111,7 +107,7 @@ const ProfileSettings = () => {
       });
 
       if (!result.canceled) {
-        setUser(prev => ({ ...prev, avatar: result.assets[0].uri }));
+        setUser((prev) => ({ ...prev, avatar: result.assets[0].uri }));
       }
     } catch (error) {
       Alert.alert('Error', 'Failed to upload image. Please try again.');
@@ -119,18 +115,14 @@ const ProfileSettings = () => {
   };
 
   const toggleSwitch = (setting) => {
-    setUser(prev => ({
+    setUser((prev) => ({
       ...prev,
       [setting]: !prev[setting],
     }));
   };
 
   const renderSettingItem = ({ icon, title, value, onPress, showToggle = false }) => (
-    <TouchableOpacity
-      style={styles.settingItem}
-      onPress={onPress}
-      activeOpacity={0.7}
-    >
+    <TouchableOpacity style={styles.settingItem} onPress={onPress} activeOpacity={0.7}>
       <View style={styles.settingItemLeft}>
         <View style={styles.settingIcon}>
           <Ionicons name={icon} size={22} color="#64748b" />
@@ -138,10 +130,7 @@ const ProfileSettings = () => {
         <Text style={styles.settingItemTitle}>{title}</Text>
       </View>
       {showToggle ? (
-        <CustomSwitch
-          value={value}
-          onValueChange={() => toggleSwitch(title.toLowerCase())}
-        />
+        <CustomSwitch value={value} onValueChange={() => toggleSwitch(title.toLowerCase())} />
       ) : (
         <View style={styles.settingItemRight}>
           {value && <Text style={styles.settingItemValue}>{value}</Text>}
@@ -157,25 +146,21 @@ const ProfileSettings = () => {
         <View style={styles.profileCard}>
           <View style={styles.avatarContainer}>
             <Image source={{ uri: user.avatar }} style={styles.avatar} />
-            <TouchableOpacity
-              style={styles.cameraButton}
-              onPress={handleImageUpload}
-            >
+            <TouchableOpacity style={styles.cameraButton} onPress={handleImageUpload}>
               <Ionicons name="camera" size={16} color="white" />
             </TouchableOpacity>
           </View>
           <View style={styles.userInfo}>
             <Text style={styles.userName}>{user.name}</Text>
-            <Text style={styles.bio} numberOfLines={2}>{user.bio}</Text>
+            <Text style={styles.bio} numberOfLines={2}>
+              {user.bio}
+            </Text>
             <View style={styles.walletContainer}>
               <Ionicons name="wallet-outline" size={16} color="#64748b" />
               <Text style={styles.walletAddress}>{user.walletAddress}</Text>
             </View>
           </View>
-          <TouchableOpacity
-            style={styles.editButton}
-            onPress={() => setShowEditModal(true)}
-          >
+          <TouchableOpacity style={styles.editButton} onPress={() => setShowEditModal(true)}>
             <Text style={styles.editButtonText}>Edit Profile</Text>
           </TouchableOpacity>
         </View>
@@ -187,7 +172,7 @@ const ProfileSettings = () => {
               icon: 'globe-outline',
               title: 'Network',
               value: user.preferredNetwork,
-              onPress: () => {}
+              onPress: () => {},
             })}
           </View>
 
@@ -198,12 +183,12 @@ const ProfileSettings = () => {
               title: '2FA',
               value: user.twoFactorEnabled,
               showToggle: true,
-              onPress: () => setShowSecurityModal(true)
+              onPress: () => setShowSecurityModal(true),
             })}
             {renderSettingItem({
               icon: 'key-outline',
               title: 'Change Password',
-              onPress: () => {}
+              onPress: () => {},
             })}
           </View>
 
@@ -213,19 +198,19 @@ const ProfileSettings = () => {
               icon: 'notifications-outline',
               title: 'Notifications',
               value: user.notifications,
-              showToggle: true
+              showToggle: true,
             })}
             {renderSettingItem({
               icon: 'moon-outline',
               title: 'Dark Mode',
               value: user.darkMode,
-              showToggle: true
+              showToggle: true,
             })}
             {renderSettingItem({
               icon: 'language-outline',
               title: 'Language',
               value: user.language,
-              onPress: () => {}
+              onPress: () => {},
             })}
           </View>
 
@@ -236,23 +221,19 @@ const ProfileSettings = () => {
         </View>
       </ScrollView>
 
-      <Modal
-        visible={showEditModal}
-        animationType="slide"
-        transparent={true}
-      >
+      <Modal visible={showEditModal} animationType="slide" transparent={true}>
         <View style={styles.modalOverlay}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
               <Text style={styles.modalTitle}>Edit Profile</Text>
-              <TouchableOpacity 
+              <TouchableOpacity
                 style={styles.modalCloseButton}
                 onPress={() => setShowEditModal(false)}
               >
                 <Ionicons name="close" size={24} color="#64748b" />
               </TouchableOpacity>
             </View>
-            
+
             <ScrollView style={styles.modalScrollView}>
               <View style={styles.inputGroup}>
                 <Text style={styles.inputLabel}>Name</Text>
@@ -264,7 +245,7 @@ const ProfileSettings = () => {
                   placeholderTextColor="#94a3b8"
                 />
               </View>
-              
+
               <View style={styles.inputGroup}>
                 <Text style={styles.inputLabel}>Email</Text>
                 <TextInput
@@ -296,7 +277,7 @@ const ProfileSettings = () => {
             <TouchableOpacity
               style={styles.saveButton}
               onPress={() => {
-                setUser(prev => ({
+                setUser((prev) => ({
                   ...prev,
                   name: newName,
                   email: newEmail,

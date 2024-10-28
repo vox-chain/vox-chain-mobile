@@ -1,6 +1,7 @@
 import { useState, useCallback } from 'react';
-import { audioRecordingService } from '@/services/Transcription/AudioRecording';
 import { Alert } from 'react-native';
+
+import { audioRecordingService } from '@/services/Transcription/AudioRecording';
 
 export const useAudioRecording = (onTranscriptionComplete: (text: string) => void) => {
   const [isListening, setIsListening] = useState(false);

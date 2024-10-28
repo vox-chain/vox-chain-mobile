@@ -1,5 +1,12 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { View, TouchableOpacity, StyleSheet, Animated, ActivityIndicator, Text } from 'react-native';
+import {
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  Animated,
+  ActivityIndicator,
+  Text,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface AudioButtonProps {
@@ -21,7 +28,7 @@ const AudioButton: React.FC<AudioButtonProps> = ({ isListening, isTranscribing, 
     let interval: NodeJS.Timeout;
     if (isListening) {
       interval = setInterval(() => {
-        setRecordingTime(prev => prev + 1);
+        setRecordingTime((prev) => prev + 1);
       }, 1000);
     } else {
       setRecordingTime(0);
@@ -87,11 +94,7 @@ const AudioButton: React.FC<AudioButtonProps> = ({ isListening, isTranscribing, 
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity 
-        onPress={onPress} 
-        disabled={isTranscribing}
-        style={styles.buttonWrapper}
-      >
+      <TouchableOpacity onPress={onPress} disabled={isTranscribing} style={styles.buttonWrapper}>
         <View
           style={[
             styles.button,

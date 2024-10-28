@@ -7,11 +7,11 @@ import CustomHeader from '../components/CustomHeader'; // Import the custom head
 import NFTsection from '../components/Home/NFTsection';
 import ContactScreen from '../screens/ContactScreen';
 import HomeScreen from '../screens/HomeScreen';
+import LogsScreen from '../screens/LogsScreen';
 import PortfolioScreen from '../screens/PortfolioScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import TransactionHistory from '../screens/TransactionHistory';
 import TransferScreen from '../screens/TransferScreen';
-import LogsScreen from '../screens/LogsScreen';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
