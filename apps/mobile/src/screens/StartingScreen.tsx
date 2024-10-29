@@ -18,7 +18,7 @@ const StartingScreen = () => {
   return (
     <View style={[styles.container, isDarkMode ? styles.darkContainer : styles.lightContainer]}>
       <Animated.Image
-        source={require('../../assets/Logo.png')}
+        source={require('../../assets/VoxChain.jpg')}
         style={[styles.logo, { opacity: fadeAnim }]}
       />
     </View>

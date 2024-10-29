@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -7,6 +8,7 @@ import AudioRecorderComponent from './AudioRecording';
 interface UserInputModuleProps {
   onInputSubmit: (inputText: string) => void;
 }
+const STORAGE_KEY = '@contacts_storage';
 
 const UserInputModule: React.FC<UserInputModuleProps> = ({ onInputSubmit }) => {
   const [inputText, setInputText] = useState('');
@@ -41,12 +43,28 @@ const UserInputModule: React.FC<UserInputModuleProps> = ({ onInputSubmit }) => {
     setInputHeight(40); // Reset input height when text is cleared
   };
 
-  const handleConfirm = () => {
+  const handleConfirm = async () => {
     if (inputText.trim()) {
-      onInputSubmit(inputText);
+      try {
+        // ** the method to send the contact data with the text input (the api needs and update to handle ot) **
+
+        // Fetch contacts data from AsyncStorage
+        const storedContacts = await AsyncStorage.getItem(STORAGE_KEY);
+        const contacts = storedContacts ? JSON.parse(storedContacts) : [];
+
+        // Combine the input text and contacts data
+        // const combinedData = {
+        //   message: inputText,
+        //   contacts,
+        // };
+        console.log('User Data:', JSON.stringify(contacts, null, 2));
+        // Pass the combined data to the parent component
+        onInputSubmit(inputText);
+      } catch (error) {
+        console.error('Error fetching contacts:', error);
+      }
     }
   };
-
   const handleContentSizeChange = (event: { nativeEvent: { contentSize: { height: number } } }) => {
     // Adjust the input height based on content size (allows growing with more lines)
     setInputHeight(Math.max(40, event.nativeEvent.contentSize.height));

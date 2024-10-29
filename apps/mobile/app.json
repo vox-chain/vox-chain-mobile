@@ -4,7 +4,7 @@
     "slug": "ft-hackathon-2024",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/Logo.png",
+    "icon": "./assets/VoxChain.jpg",
     "userInterfaceStyle": "automatic",
     "platforms": ["ios", "android"],
     "scheme": "ftwallet",

@@ -56,7 +56,7 @@ const Chat = () => {
 
     try {
       const response = await axios.post(
-        'https://1afe-196-65-182-243.ngrok-free.app/IntentMaker',
+        'https://d4e5-41-249-246-117.ngrok-free.app/IntentMaker',
         input,
         {
           headers: {

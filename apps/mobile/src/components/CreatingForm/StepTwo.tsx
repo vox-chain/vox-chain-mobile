@@ -10,7 +10,7 @@ const StepTwo: React.FC<StepTwoProps> = ({ onNext }) => (
     <Text className="text-foreground" style={styles.title}>
       Secure your wallet
     </Text>
-    <Image source={require('../../../assets/Logo.png')} style={styles.image} />
+    <Image source={require('../../../assets/VoxChain.jpg')} style={styles.image} />
     <Text className="text-foreground" style={styles.warningText}>
       Don't risk losing your funds. Protect your wallet by saving your Secret Recovery Phrase in a
       place you trust. It's the only way to recover your wallet if you get locked out of the app or
