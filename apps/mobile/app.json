@@ -9,7 +9,7 @@
     "platforms": ["ios", "android"],
     "scheme": "ftwallet",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/VoxChain.jpg",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

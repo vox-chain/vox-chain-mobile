@@ -60,7 +60,7 @@ const Chat = () => {
         input,
         {
           headers: {
-            'Content-Type': 'text/plain',
+            'Content-Type': 'application/json',
           },
         }
       );
