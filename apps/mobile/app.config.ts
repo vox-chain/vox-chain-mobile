@@ -4,7 +4,7 @@ export default ({ config }: ConfigContext): ExpoConfig => ({
   ...config,
   name: config.name || 'FT Hackathon 2024',
   slug: config.slug || 'ft-hackathon-2024',
-  owner: 'aminenouabi',
+  owner: 'fevertokens',
   android: {
     ...config.android,
     googleServicesFile:
