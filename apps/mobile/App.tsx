@@ -2,7 +2,6 @@ import '~/global.css';
 
 import '@/localization';
 
-// import crashlytics from '@react-native-firebase/crashlytics';
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
@@ -18,9 +17,6 @@ import { AppProvider } from '@/providers/App';
 export default function App() {
   const { isDarkColorScheme } = useColorScheme();
 
-  // useEffect(() => {
-  //   crashlytics().crash();
-  // }, []);
 
   return (
     <NavigationContainer theme={isDarkColorScheme ? NAV_THEME.DARK : NAV_THEME.LIGHT}>

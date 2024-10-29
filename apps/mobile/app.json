@@ -28,8 +28,6 @@
       "package": "io.fevertokens.hackathon"
     },
     "plugins": [
-      "@react-native-firebase/app",
-      "@react-native-firebase/crashlytics",
       "expo-localization",
       "expo-secure-store",
       [
