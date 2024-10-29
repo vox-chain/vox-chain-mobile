@@ -84,7 +84,7 @@ const UserInputModule: React.FC<UserInputModuleProps> = ({ onInputSubmit }) => {
           placeholderTextColor="#999"
           value={inputText}
           onChangeText={setInputText}
-          multiline={true} // Allow multi-line input
+          multiline={true}
           onContentSizeChange={handleContentSizeChange} // Handle resizing
         />
       </Animated.View>
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     lineHeight: 25,
     fontSize: 18,
     backgroundColor: '#f5fcfc',
-    minHeight: 40, // Minimum height for the input
+    minHeight: 80, // Minimum height for the input
   },
   buttonContainer: {
     flexDirection: 'row',

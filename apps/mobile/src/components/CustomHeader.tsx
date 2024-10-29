@@ -1,6 +1,5 @@
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
 
 import HeaderRight from './HeaderRight';
 
@@ -8,8 +7,7 @@ const CustomHeader: React.FC = () => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.mainTitleContainer}>
-        <MaterialIcons name="diversity-2" size={22} color="red" />
-        <Text style={styles.mainTitle}>VoxChain</Text>
+        <Image style={styles.logo} source={require('../../assets/VoxChain_2.png')} />
       </View>
       <View style={styles.headerRight}>
         <HeaderRight />
@@ -39,6 +37,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 8,
     color: 'red',
+  },
+  logo: {
+    width: 135,
+    height: 15,
   },
 });
 

@@ -46,20 +46,20 @@ export const API_KEYS = {
 export const GET_STARTED_DATA = [
   {
     id: '1',
-    title: 'Welcome to FeverTokens',
-    desc: 'lorem lorem lorem lorem lorem lorem lorem lorem',
+    title: 'Welcome to VoxChain',
+    desc: 'Speak your transactions into existence. Seamlessly send, receive, and manage your assests with just your voice.',
     image: require('~/assets/getStarted/started 1.png'),
   },
   {
     id: '2',
-    title: 'Manage your digital assets',
-    desc: 'lorem lorem lorem lorem lorem lorem lorem lorem',
+    title: 'Manage Your Digital Assets',
+    desc: 'Effortlessly control your portfolio. Just say what you need, and let VoxChain handle the rest.',
     image: require('~/assets/getStarted/started 2.png'),
   },
   {
     id: '3',
     title: 'Your gateway to web3',
-    desc: 'lorem lorem lorem lorem lorem lorem lorem lorem',
+    desc: 'Discover the future of blockchain interaction. Powered by AI, fueled by simplicity',
     image: require('~/assets/getStarted/started 3.png'),
   },
 ];

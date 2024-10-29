@@ -79,7 +79,7 @@ const WalletSetupScreen = ({ navigation }: RootStackScreenProps<'WalletSetup'>) 
       style={[styles.background, isDarkMode ? styles.darkTopContainer : styles.lightTopContainer]}
     >
       <View style={[styles.topContainer]}>
-        <Image style={styles.logo} source={require('../../assets/Logo 2.png')} />
+        <Image style={styles.logo} source={require('../../assets/VoxChain_2.png')} />
         <Text style={[styles.description, isDarkMode ? styles.darkText : styles.lightText]}>
           {t('Import an existing wallet or create a new one')}
         </Text>
@@ -125,8 +125,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(51, 51, 51, 0.7)', // Semi-transparent dark background
   },
   logo: {
-    width: 350,
-    height: 45,
+    width: 300,
+    height: 35,
     marginBottom: 20,
     marginTop: 20,
   },

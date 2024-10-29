@@ -69,7 +69,7 @@ const StepOne: React.FC<StepOneProps> = ({ onNext }) => {
           color={isChecked ? '#F20530' : undefined}
         />
         <Text className="text-foreground" style={styles.label}>
-          I understand that FeverTokens cannot recover this Pin for me.
+          I understand that VoxChain cannot recover this Pin for me.
         </Text>
       </View>
       <TouchableOpacity style={styles.startButton} onPress={generateWalletHandler}>

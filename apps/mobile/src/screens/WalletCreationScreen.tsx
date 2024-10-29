@@ -25,7 +25,7 @@ const WalletCreationScreen = ({ navigation }: RootStackScreenProps<'WalletCreati
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.container2}>
-        <Image style={styles.logo} source={require('../../assets/Logo 2.png')} />
+        <Image style={styles.logo} source={require('../../assets/VoxChain_2.png')} />
         <ProgressBar currentStep={step} />
         {renderStep()}
       </View>
@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   logo: {
-    width: 260,
-    height: 35,
+    width: 270,
+    height: 30,
     margin: 'auto',
   },
 });
