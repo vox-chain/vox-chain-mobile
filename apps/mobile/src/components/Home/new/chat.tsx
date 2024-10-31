@@ -20,9 +20,7 @@ import BalanceDispaly from '@/components/Home/BalanceDisplay';
 import NetworkSelector from '@/components/Home/SelectNetwork';
 import { useNetworkContext } from '@/context/NetworkContext';
 
-const API_HOST = 'http://15.237.248.240';
-// const API_HOST = 'http://localhost:3033';
-// ec2-15-237-248-240.compute-1.amazonaws.com
+const API_HOST = 'https://container-service-1.d0xmf61zdpsnj.eu-west-3.cs.amazonlightsail.com';
 const API_INTENT_URL = `${API_HOST}/IntentMaker`;
 
 type TransactionDetails = {
@@ -72,14 +70,7 @@ const Chat = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const { transfer } = useWallet();
   const { network, updateNetwork } = useNetworkContext();
-  const [transactionDetails, setTransactionDetails] = useState<TransactionDetails | null>({
-    chain: '1313161555',
-    action: 'TRANSFER',
-    recipientAddress: '0xBCf64cfe8a2a11E1B352F852722Afb959c26b30a',
-    recipient: 'Mouad',
-    amount: '0.00001',
-    message: 'Transaction built successfully',
-  } as any);
+  const [transactionDetails, setTransactionDetails] = useState<TransactionDetails | null>(null);
   const [userInputText, setUserInputText] = useState<string>('Send 0.00001 ETH to david');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -91,7 +82,7 @@ const Chat = () => {
     console.log('Input:', JSON.stringify(input, null, 2));
 
     try {
-      console.log('API_INTENT_URL:1');
+      console.log('API_INTENT_URL:1', API_INTENT_URL);
       const response = await axios.post(API_INTENT_URL, input, {
         headers: {
           'Content-Type': 'application/json',
@@ -232,11 +223,11 @@ const Chat = () => {
 
             {transactionDetails && (
               <View style={styles.detailsContent}>
-                <View style={styles.detailRow}>
+                {/* <View style={styles.detailRow}>
                   <Icon name="link-variant" size={20} color="#6C757D" />
                   <Text style={styles.detailLabel}>Chain:</Text>
                   <Text style={styles.detailValue}>{transactionDetails.chain}</Text>
-                </View>
+                </View> */}
                 <View style={styles.detailRow}>
                   <Icon name="gesture-tap" size={20} color="#6C757D" />
                   <Text style={styles.detailLabel}>Action:</Text>
