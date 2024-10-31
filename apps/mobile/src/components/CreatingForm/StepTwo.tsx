@@ -45,6 +45,8 @@ const styles = StyleSheet.create({
   },
   warningText: {
     fontSize: 14,
+    marginBottom: 20,
+    marginTop: 20,
   },
   startButton: {
     backgroundColor: '#F20530',

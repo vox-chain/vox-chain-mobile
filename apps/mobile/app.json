@@ -14,12 +14,14 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "googleServicesFile": "./GoogleService-Info.plist",
       "supportsTablet": true,
-      "bundleIdentifier": "io.fevertokens.hackathon"
+      "bundleIdentifier": "io.fevertokens.hackathon",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "We need access to your microphone to record audio.",
+        "NSCameraUsageDescription": "This app uses the camera to scan barcodes on event tickets."
+      }
     },
     "android": {
-      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/VoxChain.jpg",
         "backgroundColor": "#ffffff"
@@ -42,6 +44,12 @@
           "ios": {
             "useFrameworks": "static"
           }
+        }
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone."
         }
       ]
     ],

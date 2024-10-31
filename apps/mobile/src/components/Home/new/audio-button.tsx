@@ -6,8 +6,10 @@ import {
   Animated,
   ActivityIndicator,
   Text,
+  Alert,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Audio } from 'expo-av';
 
 interface AudioButtonProps {
   isListening: boolean;
@@ -22,6 +24,17 @@ const AudioButton: React.FC<AudioButtonProps> = ({ isListening, isTranscribing, 
   const barAnim3 = useRef(new Animated.Value(1)).current;
   const barAnim4 = useRef(new Animated.Value(1)).current;
   const barAnim5 = useRef(new Animated.Value(1)).current;
+
+  const [hasPermission, setHasPermission] = useState(false);
+
+  const requestMicrophonePermission = async () => {
+    const { status } = await Audio.requestPermissionsAsync();
+    if (status === 'granted') {
+      setHasPermission(true);
+    } else {
+      Alert.alert('Permission Denied', 'Microphone access is required to record audio.');
+    }
+  };
 
   // Timer logic
   useEffect(() => {
@@ -94,7 +107,19 @@ const AudioButton: React.FC<AudioButtonProps> = ({ isListening, isTranscribing, 
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onPress} disabled={isTranscribing} style={styles.buttonWrapper}>
+      <TouchableOpacity
+        onPress={() => {
+          if (!hasPermission) {
+            console.log('Requesting permission');
+            requestMicrophonePermission();
+          } else {
+            console.log('Pressing button');
+            onPress();
+          }
+        }}
+        disabled={isTranscribing}
+        style={styles.buttonWrapper}
+      >
         <View
           style={[
             styles.button,

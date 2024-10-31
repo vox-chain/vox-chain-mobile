@@ -17,7 +17,6 @@ import { AppProvider } from '@/providers/App';
 export default function App() {
   const { isDarkColorScheme } = useColorScheme();
 
-
   return (
     <NavigationContainer theme={isDarkColorScheme ? NAV_THEME.DARK : NAV_THEME.LIGHT}>
       <SafeAreaProvider>

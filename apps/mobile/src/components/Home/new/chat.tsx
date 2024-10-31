@@ -1,9 +1,21 @@
 import axios from 'axios';
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Alert, Animated, Easing, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Alert,
+  Animated,
+  Easing,
+  ScrollView,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import UserInputModule from './input-module';
+const API_HOST = 'http://localhost:3033';
+const API_Transaction_URL = `${API_HOST}/ExecuteTransaction`;
+const API_INTENT_URL = `${API_HOST}/IntentMaker`;
 
 type TransactionDetails = {
   chain: string;
@@ -49,28 +61,22 @@ const Chat = () => {
   const [userInputText, setUserInputText] = useState<string>('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const API_URL = 'http://127.0.0.1:5000/ExecuteTransaction';
-
   const handleInputSubmit = async (input: string) => {
     setUserInputText(input);
     setIsLoading(true);
 
     try {
-      const response = await axios.post(
-        'https://d4e5-41-249-246-117.ngrok-free.app/IntentMaker',
-        input,
-        {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        }
-      );
+      const response = await axios.post(API_INTENT_URL, input, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
 
       if (response.status !== 200) {
         throw new Error('Failed to extract intent.');
       }
 
-      const data = response.data;
+      const data: any = response.data;
       console.log(data);
 
       setTransactionDetails({
@@ -79,7 +85,7 @@ const Chat = () => {
         recipient: data.intent.intent.to,
         amount: `${data.intent.intent.amount}`,
         message: data.message,
-      });
+      } as any);
 
       setShowConfirmation(true);
     } catch (error) {
@@ -96,7 +102,7 @@ const Chat = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}`, {
+      const response = await fetch(`${API_Transaction_URL}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -170,7 +176,7 @@ const Chat = () => {
       ) : (
         <ScrollView style={styles.confirmationContainer}>
           <Text style={styles.confirmationTitle}>Would you like to proceed?</Text>
-          
+
           <View style={styles.userInputCard}>
             <Text style={styles.userInputText}>{userInputText}</Text>
           </View>

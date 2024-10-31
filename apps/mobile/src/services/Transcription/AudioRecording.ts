@@ -1,6 +1,6 @@
 import { Audio } from 'expo-av';
 import * as FileSystem from 'expo-file-system';
-import { Platform } from 'react-native';
+import { Platform, Alert } from 'react-native';
 
 interface AudioRecordingService {
   recording: Audio.Recording | null;
@@ -27,7 +27,7 @@ class AudioRecordingServiceImpl implements AudioRecordingService {
     try {
       const permission = await Audio.requestPermissionsAsync();
       if (permission.status !== 'granted') {
-        throw new Error('Permission not granted');
+        Alert.alert('Permission Denied', 'Microphone access is required to record audio.');
       }
 
       await Audio.setAudioModeAsync({
