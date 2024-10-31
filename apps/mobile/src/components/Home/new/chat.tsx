@@ -11,6 +11,7 @@ import {
   ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import UserInputModule from './input-module';
 const API_HOST = 'http://localhost:3033';
@@ -21,6 +22,7 @@ type TransactionDetails = {
   chain: string;
   action: string;
   recipient: string;
+  recipientAddress: string;
   amount: string;
   message: string;
   fee: string;
@@ -54,13 +56,18 @@ const LoadingSpinner = () => {
     </View>
   );
 };
+const formatAddress = (address: string) => {
+  if (!address) return '';
+  return `${address.substring(0, 6)}...${address.slice(-4)}`;
+};
 
 const Chat = () => {
   const [showConfirmation, setShowConfirmation] = useState(true);
   const [transactionDetails, setTransactionDetails] = useState<TransactionDetails | null>({
     chain: '1313161555',
     action: 'TRANSFER',
-    recipient: '0xBCf64cfe8a2a11E1B352F852722Afb959c26b30a',
+    recipientAddress: '0xBCf64cfe8a2a11E1B352F852722Afb959c26b30a',
+    recipient: 'Mouad',
     amount: '0.00001',
     message: 'Transaction built successfully',
   } as any);
@@ -93,9 +100,10 @@ const Chat = () => {
           {
             chain: data.intent.chain,
             action: data.intent.intent.transaction_type,
-            recipient: data.intent.intent.to,
+            recipientAddress: data.intent.intent.to,
             amount: `${data.intent.intent.amount}`,
             message: data.message,
+            recipient: data.intent.who,
           },
           null,
           2
@@ -105,9 +113,10 @@ const Chat = () => {
       setTransactionDetails({
         chain: data.intent.chain,
         action: data.intent.intent.transaction_type,
-        recipient: data.intent.intent.to,
+        recipientAddress: data.intent.intent.to,
         amount: `${data.intent.intent.amount}`,
         message: data.message,
+        recipient: data.intent.who,
       } as any);
 
       setShowConfirmation(true);
@@ -214,6 +223,13 @@ const Chat = () => {
                   <Text style={styles.detailValue}>{transactionDetails.recipient}</Text>
                 </View>
                 <View style={styles.detailRow}>
+                  <MaterialIcons name="share-location" size={20} color="#6C757D" />
+                  <Text style={styles.detailLabel}>Address:</Text>
+                  <Text style={styles.detailValue}>
+                    {formatAddress(transactionDetails.recipientAddress)}
+                  </Text>
+                </View>
+                <View style={styles.detailRow}>
                   <Icon name="currency-eth" size={20} color="#6C757D" />
                   <Text style={styles.detailLabel}>Amount:</Text>
                   <Text style={styles.detailValue}>{transactionDetails.amount}</Text>
@@ -221,7 +237,9 @@ const Chat = () => {
                 <View style={styles.detailRow}>
                   <Icon name="gas-station" size={20} color="#6C757D" />
                   <Text style={styles.detailLabel}>Gas Fee:</Text>
-                  <Text style={styles.detailValue}>{transactionDetails.fee}</Text>
+                  <Text style={styles.detailValue}>
+                    {transactionDetails.fee ? transactionDetails.fee : 'N/A'}
+                  </Text>
                 </View>
               </View>
             )}
@@ -399,10 +417,8 @@ const styles = StyleSheet.create({
     width: 80,
   },
   detailValue: {
-    flex: 1,
     fontSize: 16,
     color: '#212529',
-    marginLeft: 8,
   },
   buttonContainer: {
     flexDirection: 'row',
@@ -418,7 +434,8 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
     margin: 8,
-    width: 160,
+    width: 130,
+    overflow: 'hidden',
   },
   cancelButton: {
     justifyContent: 'center',
@@ -427,13 +444,16 @@ const styles = StyleSheet.create({
     padding: 12,
     borderRadius: 8,
     margin: 8,
-    width: 160,
+    width: 130,
   },
   buttonText: {
     color: '#fff',
     fontSize: 16,
     fontWeight: 'bold',
     marginLeft: 8,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
