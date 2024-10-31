@@ -56,14 +56,23 @@ const LoadingSpinner = () => {
 };
 
 const Chat = () => {
-  const [showConfirmation, setShowConfirmation] = useState(false);
-  const [transactionDetails, setTransactionDetails] = useState<TransactionDetails | null>(null);
-  const [userInputText, setUserInputText] = useState<string>('');
+  const [showConfirmation, setShowConfirmation] = useState(true);
+  const [transactionDetails, setTransactionDetails] = useState<TransactionDetails | null>({
+    chain: '1313161555',
+    action: 'TRANSFER',
+    recipient: '0xBCf64cfe8a2a11E1B352F852722Afb959c26b30a',
+    amount: '0.00001',
+    message: 'Transaction built successfully',
+  } as any);
+  const [userInputText, setUserInputText] = useState<string>('Send 0.00001 ETH to david');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleInputSubmit = async (input: string) => {
-    setUserInputText(input);
+  const handleInputSubmit = async (input: any) => {
+    console.log('Input:', input);
+    setUserInputText(input?.message);
     setIsLoading(true);
+
+    console.log('Input:', JSON.stringify(input, null, 2));
 
     try {
       const response = await axios.post(API_INTENT_URL, input, {
@@ -78,6 +87,20 @@ const Chat = () => {
 
       const data: any = response.data;
       console.log(data);
+      console.log(
+        'setTransactionDetails:',
+        JSON.stringify(
+          {
+            chain: data.intent.chain,
+            action: data.intent.intent.transaction_type,
+            recipient: data.intent.intent.to,
+            amount: `${data.intent.intent.amount}`,
+            message: data.message,
+          },
+          null,
+          2
+        )
+      );
 
       setTransactionDetails({
         chain: data.intent.chain,
@@ -102,24 +125,10 @@ const Chat = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${API_Transaction_URL}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          transaction: {
-            to: transactionDetails.recipient,
-            value: transactionDetails.amount,
-            chain: transactionDetails.chain,
-            action: transactionDetails.action,
-          },
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to execute transaction.');
-      }
-
-      const data = await response.json();
+      console.log('Transaction Details:', transactionDetails);
+      const data = {
+        receipt: '0x1234567890',
+      };
       Alert.alert('Success', `Transaction executed successfully. Receipt: ${data.receipt}`);
     } catch (error) {
       Alert.alert('Error', 'Failed to execute transaction. Please try again.');

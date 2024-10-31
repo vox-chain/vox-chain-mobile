@@ -6,7 +6,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import AudioRecorderComponent from './AudioRecording';
 
 interface UserInputModuleProps {
-  onInputSubmit: (inputText: string) => void;
+  onInputSubmit: (inputText: any) => void;
 }
 const STORAGE_KEY = '@contacts_storage';
 
@@ -51,15 +51,21 @@ const UserInputModule: React.FC<UserInputModuleProps> = ({ onInputSubmit }) => {
         // Fetch contacts data from AsyncStorage
         const storedContacts = await AsyncStorage.getItem(STORAGE_KEY);
         const contacts = storedContacts ? JSON.parse(storedContacts) : [];
+        const filterContacts = contacts.map((contact: any) => ({
+          name: contact.name.toLowerCase(),
+          address: contact.address,
+        }));
+        console.log('Filter Contacts:', JSON.stringify(filterContacts, null, 2));
 
         // Combine the input text and contacts data
-        // const combinedData = {
-        //   message: inputText,
-        //   contacts,
-        // };
+        const combinedData = {
+          message: inputText,
+          contacts: filterContacts,
+        };
         console.log('User Data:', JSON.stringify(contacts, null, 2));
+        console.log('User Input:', inputText);
         // Pass the combined data to the parent component
-        onInputSubmit(inputText);
+        onInputSubmit(combinedData as any);
       } catch (error) {
         console.error('Error fetching contacts:', error);
       }
