@@ -197,7 +197,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     alignItems: 'center',
     marginBottom: 20,
-    marginTop: 50,
+    marginTop: 90,
   },
   importButtonText: {
     color: 'white',
@@ -220,6 +220,8 @@ const styles = StyleSheet.create({
     width: 270,
     height: 30,
     margin: 'auto',
+    marginTop: 80,
+    marginBottom: 5,
   },
 });
 

@@ -133,6 +133,7 @@ const styles = StyleSheet.create({
   description: {
     fontSize: 16,
     marginBottom: 20,
+    marginTop: 20,
   },
   revealBox: {
     backgroundColor: '#F2F4F6',
@@ -154,7 +155,7 @@ const styles = StyleSheet.create({
   viewButton: {
     borderWidth: 1,
     borderColor: '#F20530',
-    borderRadius: 20,
+    borderRadius: 8,
     paddingVertical: 10,
     paddingHorizontal: 30,
     marginTop: 10,
@@ -165,7 +166,7 @@ const styles = StyleSheet.create({
   },
   continueButton: {
     backgroundColor: '#F20530',
-    borderRadius: 25,
+    borderRadius: 8,
     paddingVertical: 15,
     alignItems: 'center',
     marginTop: 20,

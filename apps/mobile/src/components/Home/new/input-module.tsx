@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1.5,
     borderRadius: 8,
-    backgroundColor: '#fff',
+    backgroundColor: '#f0e6e7',
     elevation: 3,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
@@ -148,7 +148,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   inputWrapper: {
-    marginBottom: 10,
+    marginBottom: 50,
   },
   input: {
     marginTop: 20,
@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     fontFamily: 'mono',
     lineHeight: 25,
     fontSize: 18,
-    backgroundColor: '#f5fcfc',
+    backgroundColor: '#f0e6e7',
     minHeight: 80, // Minimum height for the input
   },
   buttonContainer: {

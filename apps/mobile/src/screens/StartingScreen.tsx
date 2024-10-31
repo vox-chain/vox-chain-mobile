@@ -18,7 +18,7 @@ const StartingScreen = () => {
   return (
     <View style={[styles.container, isDarkMode ? styles.darkContainer : styles.lightContainer]}>
       <Animated.Image
-        source={require('../../assets/VoxChain.jpg')}
+        source={require('../../assets/VoxChain_2.png')}
         style={[styles.logo, { opacity: fadeAnim }]}
       />
     </View>
@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#333',
   },
   logo: {
-    width: 200,
-    height: 200,
+    width: 190,
+    height: 100,
   },
 });
 

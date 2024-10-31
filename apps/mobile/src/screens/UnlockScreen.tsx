@@ -33,7 +33,7 @@ export const UnlockScreen = () => {
   return (
     <View className="p-7 items-center flex-1 bg-background">
       <View className="flex-1 justify-center gap-5">
-        <Image source={require('../../assets/VoxChain.jpg')} style={styles.logo} />
+        <Image source={require('../../assets/VoxChain.png')} style={styles.logo} />
         <Button onPress={handleAuthenticate}>
           <Text>Unlock Wallet</Text>
         </Button>
@@ -54,8 +54,8 @@ export const UnlockScreen = () => {
 
 const styles = StyleSheet.create({
   logo: {
-    width: 150, // Adjust width as needed
-    height: 150, // Adjust height as needed
+    width: 190, // Adjust width as needed
+    height: 100, // Adjust height as needed
     marginBottom: 20, // Space between the logo and the button
   },
 });

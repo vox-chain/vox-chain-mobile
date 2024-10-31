@@ -155,8 +155,8 @@ const styles = StyleSheet.create({
     borderColor: '#F20530',
     paddingVertical: 15,
     paddingHorizontal: 20,
-    borderRadius: 30,
-    width: 300,
+    borderRadius: 8,
+    width: 340,
     marginBottom: 20,
   },
   buttonFill: {
@@ -166,8 +166,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#F20530',
     paddingVertical: 15,
     paddingHorizontal: 20,
-    borderRadius: 30,
-    width: 300,
+    borderRadius: 8,
+    width: 340,
     height: 55,
   },
   buttonTextOutline: {

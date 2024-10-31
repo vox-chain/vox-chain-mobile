@@ -10,12 +10,12 @@ const StepTwo: React.FC<StepTwoProps> = ({ onNext }) => (
     <Text className="text-foreground" style={styles.title}>
       Secure your wallet
     </Text>
-    <Image source={require('../../../assets/VoxChain.jpg')} style={styles.image} />
     <Text className="text-foreground" style={styles.warningText}>
       Don't risk losing your funds. Protect your wallet by saving your Secret Recovery Phrase in a
       place you trust. It's the only way to recover your wallet if you get locked out of the app or
       get a new device.
     </Text>
+    <Image source={require('../../../assets/dots.png')} style={styles.image} />
     <TouchableOpacity style={styles.startButton} onPress={onNext}>
       <Text style={styles.startButtonText}>Next</Text>
     </TouchableOpacity>
@@ -33,22 +33,22 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: 'bold',
-    marginBottom: 20,
     textAlign: 'center',
+    marginTop: 80,
+    marginBottom: 20,
   },
   image: {
-    width: '100%',
-    height: 200,
+    width: '80%',
+    height: 100,
     resizeMode: 'contain',
-    marginBottom: 20,
+    alignSelf: 'center',
   },
   warningText: {
     fontSize: 14,
-    marginBottom: 20,
   },
   startButton: {
     backgroundColor: '#F20530',
-    borderRadius: 25,
+    borderRadius: 10,
     paddingVertical: 15,
     alignItems: 'center',
     marginTop: 40,
