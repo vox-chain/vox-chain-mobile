@@ -4,6 +4,11 @@ import { View } from 'react-native';
 import Chat from '../components/Home/new/chat';
 import { useWallet } from '../context/WalletContext';
 import { type TabScreenProps } from '../navigation/types';
+import BalanceDispaly from '../components/Home/BalanceDisplay';
+import AccountSection from '../components/Home/AccountSection';
+import ActionsSection from '../components/Home/ActionsSection';
+import NetworkSelector from '../components/Home/SelectNetwork';
+import TokensSection from '../components/Home/TokensSection';
 
 const HomeScreen = ({ navigation }: TabScreenProps<'Home'>) => {
   const { loadWallet } = useWallet();
@@ -21,6 +26,11 @@ const HomeScreen = ({ navigation }: TabScreenProps<'Home'>) => {
 
   return (
     <View className="flex-1 pl-6 pr-6 pt-2">
+      {/* <AccountSection /> */}
+      {/* <NetworkSelector />
+      <BalanceDispaly />
+      <ActionsSection />
+      <TokensSection /> */}
       <Chat />
     </View>
   );

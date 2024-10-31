@@ -9,6 +9,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { AuthProvider } from '@/context/AuthContext';
 import { OnboardingProvider } from '@/context/OnboardingContext';
 import { WalletProvider } from '@/context/WalletContext';
+import { NetworkProvider } from '@/context/NetworkContext';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { NAV_THEME } from '@/lib/constants';
 import AppNavigator from '@/navigation/AppNavigator';
@@ -21,13 +22,15 @@ export default function App() {
     <NavigationContainer theme={isDarkColorScheme ? NAV_THEME.DARK : NAV_THEME.LIGHT}>
       <SafeAreaProvider>
         <OnboardingProvider>
-          <WalletProvider>
-            <AuthProvider>
-              <AppProvider>
-                <AppNavigator />
-              </AppProvider>
-            </AuthProvider>
-          </WalletProvider>
+          <NetworkProvider>
+            <WalletProvider>
+              <AuthProvider>
+                <AppProvider>
+                  <AppNavigator />
+                </AppProvider>
+              </AuthProvider>
+            </WalletProvider>
+          </NetworkProvider>
         </OnboardingProvider>
       </SafeAreaProvider>
     </NavigationContainer>

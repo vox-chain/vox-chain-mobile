@@ -16,7 +16,7 @@ interface WalletContextType {
   address: string | null;
   createWallet: () => Promise<boolean>;
   importWallet: (importedPrivateKey: string) => Promise<void>;
-  transfer: (recipientAddress: string, amount: string, RPC_URL: string) => Promise<void>;
+  transfer: (recipientAddress: string, amount: string, RPC_URL: string) => Promise<any>;
   getBalance: (network: string) => Promise<string>;
   restoreFromPhrase: (mnemonicPhrase: string) => Promise<boolean>;
   loadWallet: () => Promise<void>;
@@ -160,6 +160,7 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
     try {
       // prompt user to confirm transaction
       const confirmed = await confirmTransactionDetails(recipientAddress, amount);
+      let txHash = null;
       if (confirmed) {
         const provider = await getProvider(RPC_URL);
         const wallet = new ethers.Wallet(privateKey, provider);
@@ -168,8 +169,10 @@ export const WalletProvider: React.FC<WalletProviderProps> = ({ children }) => {
         console.debug(`Transaction successful with hash: ${tx.hash}`);
         toast.success('Transaction successful');
         privateKey = null;
+        txHash = tx.hash;
       }
       privateKey = null;
+      return txHash;
     } catch (error) {
       console.error('Error sending transaction:', error);
       toast.error('Transaction failed');

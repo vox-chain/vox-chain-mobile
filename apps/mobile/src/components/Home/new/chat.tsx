@@ -11,9 +11,18 @@ import {
   ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+<<<<<<< HEAD
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
+=======
+import { useWallet } from '../../../context/WalletContext';
+>>>>>>> fbe611c (v0)
 import UserInputModule from './input-module';
+import AccountSection from '@/components/Home/AccountSection';
+import BalanceDispaly from '@/components/Home/BalanceDisplay';
+import NetworkSelector from '@/components/Home/SelectNetwork';
+import { useNetworkContext } from '@/context/NetworkContext';
+
 const API_HOST = 'http://localhost:3033';
 const API_Transaction_URL = `${API_HOST}/ExecuteTransaction`;
 const API_INTENT_URL = `${API_HOST}/IntentMaker`;
@@ -63,6 +72,8 @@ const formatAddress = (address: string) => {
 
 const Chat = () => {
   const [showConfirmation, setShowConfirmation] = useState(true);
+  const { transfer } = useWallet();
+  const { network, updateNetwork } = useNetworkContext();
   const [transactionDetails, setTransactionDetails] = useState<TransactionDetails | null>({
     chain: '1313161555',
     action: 'TRANSFER',
@@ -138,6 +149,17 @@ const Chat = () => {
       const data = {
         receipt: '0x1234567890',
       };
+      if (network) {
+        const txHash = await transfer(
+          transactionDetails.recipient,
+          transactionDetails.amount,
+          network?.url_rpc
+        );
+        data.receipt = txHash as string;
+      } else {
+        Alert.alert('Error', 'Network not selected');
+      }
+
       Alert.alert('Success', `Transaction executed successfully. Receipt: ${data.receipt}`);
     } catch (error) {
       Alert.alert('Error', 'Failed to execute transaction. Please try again.');
@@ -164,6 +186,9 @@ const Chat = () => {
           <Text style={styles.headerText}>Home</Text>
         </View>
       </View>
+      <AccountSection />
+      <NetworkSelector />
+      <BalanceDispaly />
 
       {isLoading ? (
         <LoadingSpinner />

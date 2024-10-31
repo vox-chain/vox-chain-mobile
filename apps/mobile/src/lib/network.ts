@@ -16,6 +16,22 @@ interface Network {
 
 const NETWORKS: Network[] = [
   {
+    name: 'Aurora',
+    symbol: 'ETH',
+    url_rpc: 'https://mainnet.aurora.dev',
+    apiUrl: '',
+    chainId: 1313161554,
+    icon: Ethereum,
+  },
+  {
+    name: 'Aurora Testnet',
+    symbol: 'ETH',
+    url_rpc: 'https://testnet.aurora.dev',
+    apiUrl: '',
+    chainId: 1313161555,
+    icon: Ethereum,
+  },
+  {
     name: 'Sepolia',
     symbol: 'Sep',
     url_rpc: 'https://sepolia.drpc.org',
@@ -66,6 +82,22 @@ const NETWORKS: Network[] = [
 ] as const;
 
 const NETWORKS_DICT = {
+  Aurora: {
+    name: 'Aurora',
+    symbol: 'ETH',
+    url_rpc: 'https://mainnet.aurora.dev',
+    apiUrl: '',
+    chainId: 1313161554,
+    icon: Ethereum,
+  },
+  AuroraTest: {
+    name: 'Aurora Testnet',
+    symbol: 'ETH',
+    url_rpc: 'https://testnet.aurora.dev',
+    apiUrl: '',
+    chainId: 1313161555,
+    icon: Ethereum,
+  },
   Sep: {
     name: 'Sepolia',
     symbol: 'Sep',
