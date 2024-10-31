@@ -1,45 +1,116 @@
-# 📦 FT Hackaton 2024 Monorepo
+# VoxChain
 
-## ⚠️ Under Construction
+## Overview
 
-This project is currently under active development. Features and documentation are subject to change.
+VoxChain is a mobile application that simplifies blockchain interactions through voice commands or written instructions. By utilizing the Whisper LLM and IntentMaker API, VoxChain transforms user commands into actionable transactions, making blockchain technology more accessible and intuitive.
 
-### Dependencies
+## Features
 
-- [Node.js](https://nodejs.org/en/download/) - JavaScript runtime
-- [pnpm](https://pnpm.io/installation) - Fast, disk space efficient package manager
+- **Voice Commands**: Users can execute commands by speaking, thanks to advanced speech-to-text processing and natural language understanding.
+- **Written Commands**: Alternatively, users can type their commands to interact with the blockchain.
+- **Intent Extraction**: The application extracts user intent and desired actions to confirm and execute transactions.
+- **User-Friendly Interface**: Designed to mask the complexity of blockchain interactions, VoxChain provides a seamless user experience.
 
-### Commands
+## Getting Started
 
-- `$ pnpm dev` - Build and watch all **apps** and **packages** for development.
-- `$ pnpm lint` - Analyze the source code of all **apps** and **packages** using ESLint.
-- `$ pnpm lint-fix` - Fix all fixable warnings for **apps** and **packages** using ESLint.
-- `$ pnpm build` - Build all **apps** and **packages** for production or to publish them on npm.
+### Prerequisites
 
-This monorepo uses a simple npm script convention of `dev:<app-name>` and `build:<app-name>` to keep this process simple. Under the hood, it uses [Turborepo's workspace filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering), defined as an npm script in the root [**package.json**](./package.json).
+- Node.js (version 14.x or later)
+- Expo CLI installed globally
+- A compatible device or simulator for Android or iOS
 
-- `$ pnpm dev:mobile` - Build and watch **app/mobile** and all **packages** used in mobile, for development.
-- `$ pnpm build:mobile` - Build **apps/mobile** and all **packages** used in mobile, for production deployments
+### Installation
 
-## 📁 Structure
+1. Clone the repository:
 
-- [`apps`](./apps) - Apps that only use packages and aren't aware of other apps.
-- [`packages`](./packages) - Packages that may use external and/or other monorepo packages.
+   ```bash
+   git clone https://github.com/yourusername/ft-hackathon-2024.git
+   cd apps/mobile
+   ```
 
-### Apps
+2. Install dependencies:
 
-- [`apps/mobile`](./apps/mobile) - Expo app using `eslint-config` package.
+   ```bash
+   pnpm install
+   ```
 
-### Packages
+### Running the Application
 
-- [`packages/eslint-config`](./packages/eslint-config) - Preconfigured ESLint configuration for each app or package.
+To start the development server, run:
 
-<!-- ## 👷 Workflows
+```bash
+npm run dev
+```
 
-- [`build`](./.github/workflows/build.yml) - Starts the EAS builds for **apps/mobile** using the given profile.
-- [`preview`](./.github/workflows/preview.yml) - Publishes apps to a PR-specific release channel and adds a QR code to that PR.
-- [`test`](./.github/workflows/test.yml) - Ensures that the apps and packages are healthy on multiple OSs.
+For Android, you can run:
 
-### Composite workflows
+```bash
+npm run android
+```
 
-- [`setup-monorepo`](./.github/actions/setup-monorepo/action.yml) - Reusable composite workflow to setup the monorepo in GitHub Actions. -->
+For iOS, run:
+
+```bash
+npm run ios
+```
+
+For web, use:
+
+```bash
+npm run web
+```
+
+### Building the Application
+
+To create a production build, run:
+
+```bash
+npm run build
+```
+
+### Scripts
+
+- **dev**: Starts the Expo development server.
+- **lint**: Runs ESLint to check for code quality.
+- **lint-fix**: Automatically fixes linting issues.
+- **build**: Exports the application for production.
+- **start**: Starts the application in LAN mode.
+- **android**: Runs the application on an Android device or emulator.
+- **ios**: Runs the application on an iOS device or simulator.
+- **web**: Runs the application in a web environment.
+- **clean**: Cleans up the project by removing build artifacts and node modules.
+
+## How VoxChain Works
+
+### Voice Processing and NLP
+
+VoxChain leverages AI-powered voice recognition to capture user commands. Upon receiving a command (e.g., "Send 0.5 ETH to Alice"), the app translates it into a blockchain-ready transaction using Natural Language Processing (NLP).
+
+### Integration with Blockchain Protocols
+
+VoxChain interacts with various blockchain protocols through APIs. It enables wallet interactions, address lookups, balance checks, and transaction execution.
+
+### Smart Contract Development
+
+To execute transactions efficiently and securely, smart contracts are developed, which allow VoxChain to handle user transactions while maintaining safety protocols.
+
+## Key Learnings
+
+- **Voice Processing and AI Models**: Integrating voice recognition and NLP helps in understanding user commands in a variety of contexts.
+- **User Experience and Security**: Balancing an intuitive interface with robust security measures is crucial for user trust and safety.
+
+## Challenges Faced
+
+- **Intent Recognition**: Accurately interpreting diverse command structures proved challenging.
+- **Latency in Processing**: Ensuring fast response times for voice commands and transaction processing was essential for a smooth user experience.
+- **Blockchain Security Risks**: Maintaining secure transactions while leveraging AI for command interpretation was a constant concern.
+
+## Future Improvements
+
+- **Integrate More Blockchain Networks**: Expanding support for various blockchain ecosystems.
+- **Enhance AI Model Accuracy**: Continuously improve the AI model to better recognize user intents.
+- **Simplify Transaction Handling**: Using account abstraction to streamline the onboarding process for users.
+
+## Conclusion
+
+VoxChain aims to revolutionize the way users interact with blockchain technology, making it as simple as having a conversation. We are committed to enhancing the user experience and accessibility of decentralized finance.
