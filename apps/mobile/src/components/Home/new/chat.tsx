@@ -20,8 +20,8 @@ import BalanceDispaly from '@/components/Home/BalanceDisplay';
 import NetworkSelector from '@/components/Home/SelectNetwork';
 import { useNetworkContext } from '@/context/NetworkContext';
 
-const API_HOST = 'http://localhost:3033';
-const API_Transaction_URL = `${API_HOST}/ExecuteTransaction`;
+const API_HOST = 'http://15.237.248.240:80';
+// ec2-15-237-248-240.compute-1.amazonaws.com
 const API_INTENT_URL = `${API_HOST}/IntentMaker`;
 
 type TransactionDetails = {
@@ -68,7 +68,7 @@ const formatAddress = (address: string) => {
 };
 
 const Chat = () => {
-  const [showConfirmation, setShowConfirmation] = useState(true);
+  const [showConfirmation, setShowConfirmation] = useState(false);
   const { transfer } = useWallet();
   const { network, updateNetwork } = useNetworkContext();
   const [transactionDetails, setTransactionDetails] = useState<TransactionDetails | null>({
@@ -90,11 +90,13 @@ const Chat = () => {
     console.log('Input:', JSON.stringify(input, null, 2));
 
     try {
+      console.log('API_INTENT_URL:1');
       const response = await axios.post(API_INTENT_URL, input, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
+      console.log('API_INTENT_URL:2');
 
       if (response.status !== 200) {
         throw new Error('Failed to extract intent.');
@@ -130,7 +132,7 @@ const Chat = () => {
       setShowConfirmation(true);
     } catch (error) {
       Alert.alert('Error', 'Could not process your input. Please try again.');
-      console.error(error);
+      console.error('%j', error);
     } finally {
       setIsLoading(false);
     }
@@ -148,7 +150,7 @@ const Chat = () => {
       };
       if (network) {
         const txHash = await transfer(
-          transactionDetails.recipient,
+          transactionDetails.recipientAddress,
           transactionDetails.amount,
           network?.url_rpc
         );
