@@ -11,12 +11,9 @@ import {
   ScrollView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-<<<<<<< HEAD
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
-=======
 import { useWallet } from '../../../context/WalletContext';
->>>>>>> fbe611c (v0)
+
 import UserInputModule from './input-module';
 import AccountSection from '@/components/Home/AccountSection';
 import BalanceDispaly from '@/components/Home/BalanceDisplay';
