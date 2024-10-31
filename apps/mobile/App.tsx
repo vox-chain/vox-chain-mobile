@@ -16,10 +16,8 @@ import AppNavigator from '@/navigation/AppNavigator';
 import { AppProvider } from '@/providers/App';
 
 export default function App() {
-  const { isDarkColorScheme } = useColorScheme();
-
   return (
-    <NavigationContainer theme={isDarkColorScheme ? NAV_THEME.DARK : NAV_THEME.LIGHT}>
+    <NavigationContainer theme={NAV_THEME.LIGHT}>
       <SafeAreaProvider>
         <OnboardingProvider>
           <NetworkProvider>

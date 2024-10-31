@@ -20,7 +20,8 @@ import BalanceDispaly from '@/components/Home/BalanceDisplay';
 import NetworkSelector from '@/components/Home/SelectNetwork';
 import { useNetworkContext } from '@/context/NetworkContext';
 
-const API_HOST = 'http://15.237.248.240:80';
+const API_HOST = 'http://15.237.248.240';
+// const API_HOST = 'http://localhost:3033';
 // ec2-15-237-248-240.compute-1.amazonaws.com
 const API_INTENT_URL = `${API_HOST}/IntentMaker`;
 

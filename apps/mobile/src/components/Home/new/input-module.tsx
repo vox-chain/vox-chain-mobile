@@ -59,7 +59,7 @@ const UserInputModule: React.FC<UserInputModuleProps> = ({ onInputSubmit }) => {
 
         // Combine the input text and contacts data
         const combinedData = {
-          message: inputText,
+          message: inputText.toLowerCase(),
           contacts: filterContacts,
         };
         console.log('User Data:', JSON.stringify(contacts, null, 2));
