@@ -179,7 +179,7 @@ const Chat = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <View style={styles.header}>
         <View style={styles.headerLeft}>
           <Icon name="home" size={24} color="#000" style={styles.headerIcon} />
@@ -217,7 +217,7 @@ const Chat = () => {
           </View>
         </View>
       ) : (
-        <ScrollView style={styles.confirmationContainer}>
+        <ScrollView style={styles.confirmationContainer} showsVerticalScrollIndicator={false}>
           <Text style={styles.confirmationTitle}>Would you like to proceed?</Text>
 
           <View style={styles.userInputCard}>
@@ -281,7 +281,7 @@ const Chat = () => {
           </View>
         </ScrollView>
       )}
-    </View>
+    </ScrollView>
   );
 };
 
